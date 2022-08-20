@@ -1,0 +1,22 @@
+version: "3.9"
+
+networks:
+  pgcluster:
+    driver: bridge
+
+volumes:
+  pgdata:
+
+services:
+  master:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      PG_PASSWORD: docker
+    volumes:
+      - pgdata:/usr/local/pgsql/data
+    ports:
+      - 5432:5432
+    
